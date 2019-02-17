@@ -1,0 +1,20 @@
+// комментарий
+/*
+ это тоже комментарий
+ arg1, arg2, arg3 - это простые аргументы
+ ...args - это остальные переданные аргументы в виде списка
+ */
+func testFunction(arg1, arg2, arg3 = null, ...args){
+  // это словарь
+  if(count(args) < 2){
+    return null
+  }
+  result = {}
+  i = 0+=
+  for(arg : [arg1, arg2, arg3]){
+    result[args[i]] = arg
+  }
+  return result
+}
+print testFunction("hello", "world", ...['first', 'second', 3])
+// результат {'first':'hello', 'second':'world', 3:null}
