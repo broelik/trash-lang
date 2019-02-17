@@ -6,8 +6,8 @@ namespace trash\common\value;
 
 use trash\common\Environment;
 
-class ListValue extends BaseValue{
-    const NAME = 'list';
+class ArrayValue extends BaseValue{
+    const NAME = 'array';
 
     function plus(Environment $environment, Value $other): Value{
         // TODO: Implement plus() method.
