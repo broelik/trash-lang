@@ -9,6 +9,20 @@ use trash\common\Environment;
 class FloatValue extends BaseValue{
     const NAME = 'float';
 
+    /**
+     * @var float
+     */
+    private $value;
+
+    /**
+     * FloatValue constructor.
+     * @param float $value
+     */
+    public function __construct(float $value){
+        $this->value = $value;
+    }
+
+
     function plus(Environment $environment, Value $other): Value{
         // TODO: Implement plus() method.
     }
@@ -59,5 +73,30 @@ class FloatValue extends BaseValue{
 
     function getName(): string{
         return self::NAME;
+    }
+
+    public static function valueOf(float $value): FloatValue{
+        return new FloatValue($value);
+    }
+
+    function floatValue(): FloatValue{
+        return $this;
+    }
+
+
+    function toInteger(): int{
+        return $this->value;
+    }
+
+    function toFloat(): float{
+        return $this->value;
+    }
+
+    function toBoolean(): bool{
+        return $this->value;
+    }
+
+    function toString(): string{
+        return $this->value;
     }
 }

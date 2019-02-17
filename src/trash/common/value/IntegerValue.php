@@ -9,6 +9,20 @@ use trash\common\Environment;
 class IntegerValue extends BaseValue{
     const NAME = 'int';
 
+    /**
+     * @var int
+     */
+    private $value;
+
+    /**
+     * IntegerValue constructor.
+     * @param int $value
+     */
+    public function __construct(int $value){
+        $this->value = $value;
+    }
+
+
     function plus(Environment $environment, Value $other): Value{
         // TODO: Implement plus() method.
     }
@@ -59,5 +73,31 @@ class IntegerValue extends BaseValue{
 
     function getName(): string{
         return self::NAME;
+    }
+
+    function integerValue(): IntegerValue{
+        return $this;
+    }
+
+
+    function toInteger(): int{
+        return $this->value;
+    }
+
+    function toFloat(): float{
+        return $this->value;
+    }
+
+    function toBoolean(): bool{
+        return $this->value;
+    }
+
+    function toString(): string{
+        return $this->toString();
+    }
+
+
+    public static function valueOf(int $value): IntegerValue{
+        return new IntegerValue($value);
     }
 }

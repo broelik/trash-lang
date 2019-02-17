@@ -28,4 +28,16 @@ interface Value{
     function invoke(Environment $environment, Value ...$values): Value;
 
     function getName(): string;
+
+    function toString(): string;
+    function toInteger(): int;
+    function toFloat(): float;
+    function toBoolean(): bool;
+    function toArray(): array;
+
+    function stringValue(): StringValue;
+    function integerValue(): IntegerValue;
+    function floatValue(): FloatValue;
+    function booleanValue(): BooleanValue;
+    function arrayValue(): ArrayValue;
 }
