@@ -24,51 +24,82 @@ class FloatValue extends BaseValue{
 
 
     function plus(Environment $environment, Value $other): Value{
-        // TODO: Implement plus() method.
+        if($other instanceof IntegerValue || $other instanceof BooleanValue || $other instanceof FloatValue){
+            return FloatValue::valueOf($this->value + $other->toFloat());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
     function minus(Environment $environment, Value $other): Value{
-        // TODO: Implement minus() method.
+        if($other instanceof IntegerValue || $other instanceof BooleanValue || $other instanceof FloatValue){
+            return FloatValue::valueOf($this->value - $other->toFloat());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
     function mul(Environment $environment, Value $other): Value{
-        // TODO: Implement mul() method.
+        if($other instanceof IntegerValue || $other instanceof BooleanValue || $other instanceof FloatValue){
+            return FloatValue::valueOf($this->value * $other->toFloat());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
     function div(Environment $environment, Value $other): Value{
-        // TODO: Implement div() method.
+        if($other instanceof IntegerValue || $other instanceof BooleanValue || $other instanceof FloatValue){
+            return FloatValue::valueOf($this->value / $other->toFloat());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
     function rem(Environment $environment, Value $other): Value{
-        // TODO: Implement rem() method.
+        if($other instanceof IntegerValue || $other instanceof BooleanValue || $other instanceof FloatValue){
+            return FloatValue::valueOf($this->value % $other->toFloat());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function equal(Environment $environment, Value $other): Value{
-        // TODO: Implement equal() method.
+    function equal(Environment $environment, Value $other): BooleanValue{
+        return BooleanValue::valueOf($this->toFloat() == $other->toFloat());
     }
 
-    function notEqual(Environment $environment, Value $other): Value{
-        // TODO: Implement notEqual() method.
+    function notEqual(Environment $environment, Value $other): BooleanValue{
+        return $this->equal($environment, $other)->not();
     }
 
-    function less(Environment $environment, Value $other): Value{
-        // TODO: Implement less() method.
+    function less(Environment $environment, Value $other): BooleanValue{
+        if($other instanceof IntegerValue || $other instanceof FloatValue || $other instanceof BooleanValue){
+            return BooleanValue::valueOf($this->toFloat() < $other->toFloat());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function more(Environment $environment, Value $other): Value{
-        // TODO: Implement more() method.
+    function more(Environment $environment, Value $other): BooleanValue{
+        if($other instanceof IntegerValue || $other instanceof FloatValue || $other instanceof BooleanValue){
+            return BooleanValue::valueOf($this->toFloat() > $other->toFloat());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function equalLess(Environment $environment, Value $other): Value{
-        // TODO: Implement equalLess() method.
+    function equalLess(Environment $environment, Value $other): BooleanValue{
+        if($other instanceof IntegerValue || $other instanceof FloatValue || $other instanceof BooleanValue){
+            return BooleanValue::valueOf($this->toFloat() <= $other->toFloat());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function equalMore(Environment $environment, Value $other): Value{
-        // TODO: Implement equalMore() method.
+    function equalMore(Environment $environment, Value $other): BooleanValue{
+        if($other instanceof IntegerValue || $other instanceof FloatValue || $other instanceof BooleanValue){
+            return BooleanValue::valueOf($this->toFloat() >= $other->toFloat());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function not(): Value{
-        // TODO: Implement not() method.
+    function not(): BooleanValue{
+        return $this->booleanValue()->not();
+    }
+
+    function invert(): Value{
+        return self::valueOf(-$this->value);
     }
 
     function getName(): string{
@@ -99,4 +130,5 @@ class FloatValue extends BaseValue{
     function toString(): string{
         return $this->value;
     }
+
 }

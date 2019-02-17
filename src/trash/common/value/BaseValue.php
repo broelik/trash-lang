@@ -19,6 +19,58 @@ abstract class BaseValue implements Value{
         throw new \RuntimeException("Unable to invoke {$this->getName()}");
     }
 
+    function plus(Environment $environment, Value $other): Value{
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
+    }
+
+    function minus(Environment $environment, Value $other): Value{
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
+    }
+
+    function mul(Environment $environment, Value $other): Value{
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
+    }
+
+    function div(Environment $environment, Value $other): Value{
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
+    }
+
+    function rem(Environment $environment, Value $other): Value{
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
+    }
+
+    function equal(Environment $environment, Value $other): BooleanValue{
+        return BooleanValue::valueOf($this === $other);
+    }
+
+    function notEqual(Environment $environment, Value $other): BooleanValue{
+        return $this->equal($environment, $other)->not();
+    }
+
+    function less(Environment $environment, Value $other): BooleanValue{
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
+    }
+
+    function more(Environment $environment, Value $other): BooleanValue{
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
+    }
+
+    function equalLess(Environment $environment, Value $other): BooleanValue{
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
+    }
+
+    function equalMore(Environment $environment, Value $other): BooleanValue{
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
+    }
+
+    function not(): BooleanValue{
+        return $this->booleanValue()->not();
+    }
+
+    function invert(): Value{
+        return $this->throwUnsupportedOperandException(__FUNCTION__);
+    }
+
     public final function __toString(){
         return $this->toString();
     }
@@ -45,6 +97,15 @@ abstract class BaseValue implements Value{
 
     function toArray(): array{
         throw new \RuntimeException("Unable cast {$this->getName()} to array");
+    }
+
+    protected function throwUnsupportedOperandException(string $operation, Value $other = null){
+        if($other != null){
+            throw new \RuntimeException("Unable to {$operation} with {$this->getName()} and {$other->getName()}");
+        }
+        else{
+            throw new \RuntimeException("Unable to {$operation} with {$this->getName()}");
+        }
     }
 
 

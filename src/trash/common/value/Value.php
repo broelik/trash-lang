@@ -13,14 +13,15 @@ interface Value{
     function div(Environment $environment, Value $other): Value;
     function rem(Environment $environment, Value $other): Value;
 
-    function equal(Environment $environment, Value $other): Value;
-    function notEqual(Environment $environment, Value $other): Value;
-    function less(Environment $environment, Value $other): Value;
-    function more(Environment $environment, Value $other): Value;
-    function equalLess(Environment $environment, Value $other): Value;
-    function equalMore(Environment $environment, Value $other): Value;
+    function equal(Environment $environment, Value $other): BooleanValue;
+    function notEqual(Environment $environment, Value $other): BooleanValue;
+    function less(Environment $environment, Value $other): BooleanValue;
+    function more(Environment $environment, Value $other): BooleanValue;
+    function equalLess(Environment $environment, Value $other): BooleanValue;
+    function equalMore(Environment $environment, Value $other): BooleanValue;
 
-    function not(): Value;
+    function invert(): Value;
+    function not(): BooleanValue;
 
     function arrayGet(Environment $environment, string $key): Value;
     function arraySet(Environment $environment, string $key, Value $value): Value;

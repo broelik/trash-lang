@@ -24,51 +24,58 @@ class StringValue extends BaseValue{
 
 
     function plus(Environment $environment, Value $other): Value{
-        // TODO: Implement plus() method.
+        if($other instanceof StringValue){
+            return StringValue::valueOf($this->value.$other->toString());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function minus(Environment $environment, Value $other): Value{
-        // TODO: Implement minus() method.
+    function equal(Environment $environment, Value $other): BooleanValue{
+        if($other instanceof StringValue){
+            return BooleanValue::valueOf($this->toString() == $other->toString());
+        }
+        return self::FALSE();
     }
 
-    function mul(Environment $environment, Value $other): Value{
-        // TODO: Implement mul() method.
+    function notEqual(Environment $environment, Value $other): BooleanValue{
+        return $this->equalMore($environment, $other)->not();
     }
 
-    function div(Environment $environment, Value $other): Value{
-        // TODO: Implement div() method.
+    function less(Environment $environment, Value $other): BooleanValue{
+        if($other instanceof StringValue){
+            return BooleanValue::valueOf($this->toString() < $other->toString());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function rem(Environment $environment, Value $other): Value{
-        // TODO: Implement rem() method.
+    function more(Environment $environment, Value $other): BooleanValue{
+        if($other instanceof StringValue){
+            return BooleanValue::valueOf($this->toString() > $other->toString());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function equal(Environment $environment, Value $other): Value{
-        // TODO: Implement equal() method.
+    function equalLess(Environment $environment, Value $other): BooleanValue{
+        if($other instanceof StringValue){
+            return BooleanValue::valueOf($this->toString() <= $other->toString());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function notEqual(Environment $environment, Value $other): Value{
-        // TODO: Implement notEqual() method.
+    function equalMore(Environment $environment, Value $other): BooleanValue{
+        if($other instanceof StringValue){
+            return BooleanValue::valueOf($this->toString() >= $other->toString());
+        }
+        return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function less(Environment $environment, Value $other): Value{
-        // TODO: Implement less() method.
+    function not(): BooleanValue{
+        return $this->booleanValue()->not();
     }
 
-    function more(Environment $environment, Value $other): Value{
-        // TODO: Implement more() method.
-    }
 
-    function equalLess(Environment $environment, Value $other): Value{
-        // TODO: Implement equalLess() method.
-    }
-
-    function equalMore(Environment $environment, Value $other): Value{
-        // TODO: Implement equalMore() method.
-    }
-
-    function not(): Value{
-        // TODO: Implement not() method.
+    function invert(): Value{
+        return $this->throwUnsupportedOperandException(__FUNCTION__);
     }
 
     function getName(): string{

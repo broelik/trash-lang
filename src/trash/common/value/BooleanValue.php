@@ -24,51 +24,55 @@ class BooleanValue extends BaseValue{
 
 
     function plus(Environment $environment, Value $other): Value{
-        // TODO: Implement plus() method.
+        return $this->integerValue()->plus($environment, $other);
     }
 
     function minus(Environment $environment, Value $other): Value{
-        // TODO: Implement minus() method.
+        return $this->integerValue()->minus($environment, $other);
     }
 
     function mul(Environment $environment, Value $other): Value{
-        // TODO: Implement mul() method.
+        return $this->integerValue()->mul($environment, $other);
     }
 
     function div(Environment $environment, Value $other): Value{
-        // TODO: Implement div() method.
+        return $this->integerValue()->div($environment, $other);
     }
 
     function rem(Environment $environment, Value $other): Value{
-        // TODO: Implement rem() method.
+        return $this->integerValue()->rem($environment, $other);
     }
 
-    function equal(Environment $environment, Value $other): Value{
-        // TODO: Implement equal() method.
+    function equal(Environment $environment, Value $other): BooleanValue{
+        return $this->integerValue()->equal($environment, $other);
     }
 
-    function notEqual(Environment $environment, Value $other): Value{
-        // TODO: Implement notEqual() method.
+    function notEqual(Environment $environment, Value $other): BooleanValue{
+        return $this->integerValue()->notEqual($environment, $other);
     }
 
-    function less(Environment $environment, Value $other): Value{
-        // TODO: Implement less() method.
+    function less(Environment $environment, Value $other): BooleanValue{
+        return $this->integerValue()->less($environment, $other);
     }
 
-    function more(Environment $environment, Value $other): Value{
-        // TODO: Implement more() method.
+    function more(Environment $environment, Value $other): BooleanValue{
+        return $this->integerValue()->more($environment, $other);
     }
 
-    function equalLess(Environment $environment, Value $other): Value{
-        // TODO: Implement equalLess() method.
+    function equalLess(Environment $environment, Value $other): BooleanValue{
+        return $this->integerValue()->equalLess($environment, $other);
     }
 
-    function equalMore(Environment $environment, Value $other): Value{
-        // TODO: Implement equalMore() method.
+    function equalMore(Environment $environment, Value $other): BooleanValue{
+        return $this->integerValue()->equalMore($environment, $other);
     }
 
-    function not(): Value{
-        // TODO: Implement not() method.
+    function not(): BooleanValue{
+        return $this->value ? self::FALSE() : self::TRUE();
+    }
+
+    function invert(): Value{
+        return $this->not();
     }
 
     function getName(): string{
@@ -109,5 +113,4 @@ class BooleanValue extends BaseValue{
     function toString(): string{
         return $this->value ? "true" : "false";
     }
-
 }
