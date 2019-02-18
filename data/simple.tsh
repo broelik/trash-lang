@@ -1,5 +1,15 @@
-a = 2
-b = 3
-
-print [b,
-a]
+name = "blyat"
+func test(test="kek"){
+    func subFunction(){
+        return test
+    }
+    if(test == "kek"){
+        return subFunction()
+    }
+}
+for(a : [1, 2, 3]){
+    print a
+    if(a == 2){
+        break
+    }
+}

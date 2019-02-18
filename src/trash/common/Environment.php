@@ -13,6 +13,13 @@ class Environment{
     private $locals = [];
 
 
+    public function __construct(?Environment $environment = null){
+        if($environment){
+            $this->locals = $environment->locals;
+        }
+    }
+
+
     public function getLocal(string $name): ?Value{
         return $this->locals[$name];
     }

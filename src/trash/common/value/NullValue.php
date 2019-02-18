@@ -15,6 +15,10 @@ class NullValue extends BooleanValue{
         return BaseValue::FALSE();
     }
 
+    function toString(): string{
+        return 'null';
+    }
+
 
     function getName(): string{
         return self::NAME;

@@ -112,12 +112,8 @@ class IntegerValue extends BaseValue{
         return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function not(): BooleanValue{
-        return $this->booleanValue()->not();
-    }
 
-
-    function invert(): Value{
+    function invert(Environment $environment): Value{
         return self::valueOf(-$this->value);
     }
 
@@ -143,7 +139,7 @@ class IntegerValue extends BaseValue{
     }
 
     function toString(): string{
-        return $this->toString();
+        return $this->value;
     }
 
 

@@ -32,31 +32,30 @@ class TokenType{
     // math operators
     const PLUS = 207;           // +
     const MINUS = 208;          // -
-    const MUL = 208;            // *
-    const DIV = 209;            // /
-    const REM = 210;            // %
+    const MUL = 209;            // *
+    const DIV = 210;            // /
+    const REM = 211;            // %
 
     // assigment operators
-    const EQ = 211;             // =
-    const EQ_PLUS = 212;        // +=
-    const EQ_MINUS = 213;       // -=
-    const EQ_MUL = 214;         // *=
-    const EQ_DIV = 215;         // /=
-    const EQ_REM = 216;         // %=
+    const EQ = 212;             // =
+    const EQ_PLUS = 213;        // +=
+    const EQ_MINUS = 214;       // -=
+    const EQ_MUL = 215;         // *=
+    const EQ_DIV = 216;         // /=
+    const EQ_REM = 217;         // %=
 
     // logic operators
-    const EQ_EQ = 217;          // ==
-    const NOT_EQ = 218;         // !=
-    const LESS = 219;           // <
-    const MORE = 220;           // >
-    const EQ_LESS = 221;        // <=
-    const EQ_MORE = 222;        // >=
-    const NOT = 223;            // ! or not
+    const EQ_EQ = 218;          // ==
+    const NOT_EQ = 219;         // !=
+    const LESS = 220;           // <
+    const MORE = 221;           // >
+    const EQ_LESS = 222;        // <=
+    const EQ_MORE = 223;        // >=
+    const NOT = 224;            // ! or not
 
-    const COMMA = 224;          // ,
-    const POINT = 225;          // .
-    const COLON = 226;          // :
-    const SEMICOLON = 227;      // ;
+    const COMMA = 225;          // ,
+    const POINT = 226;          // .
+    const COLON = 227;          // :
     const ELLIPSIS = 228;       // ...
 
 
@@ -71,6 +70,8 @@ class TokenType{
     // keywords
     const RETURN = 307;         // return expression
     const PRINT = 308;          // print expression
+    const CONTINUE = 310;       // continue
+    const BREAK = 311;          // break
 
 
     /**
@@ -92,5 +93,50 @@ class TokenType{
         catch(\ReflectionException $e){
             return null;
         }
+    }
+
+    public static function operatorToString(int $type): ?string{
+        switch($type){
+            case TokenType::EQ:
+                return '=';
+            case TokenType::EQ_PLUS:
+                return '+=';
+            case TokenType::EQ_MINUS:
+                return '-=';
+            case TokenType::EQ_MUL:
+                return '*=';
+            case TokenType::EQ_DIV:
+                return '/=';
+            case TokenType::EQ_REM:
+                return '%=';
+
+            case TokenType::PLUS:
+                return '+';
+            case TokenType::MINUS:
+                return '-';
+            case TokenType::MUL:
+                return '*';
+            case TokenType::DIV:
+                return '/';
+            case TokenType::REM:
+                return '%';
+            case TokenType::NOT:
+                return '!';
+
+            case TokenType::EQ_EQ:
+                return '==';
+            case TokenType::EQ_LESS:
+                return '<=';
+            case TokenType::EQ_MORE:
+                return '>=';
+            case TokenType::LESS:
+                return '<';
+            case TokenType::MORE:
+                return '>';
+            case TokenType::NOT_EQ:
+                return '!=';
+        }
+
+        return null;
     }
 }

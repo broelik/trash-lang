@@ -9,7 +9,7 @@ func testFunction(arg1, arg2, arg3 = null, ...args){
   if(count(args) < 2){
     return null
   }
-  result = {}
+  result = []
   i = 0+=
   for(arg : [arg1, arg2, arg3]){
     result[args[i]] = arg
@@ -17,4 +17,4 @@ func testFunction(arg1, arg2, arg3 = null, ...args){
   return result
 }
 print testFunction("hello", "world", ...['first', 'second', 3])
-// результат {'first':'hello', 'second':'world', 3:null}
+// результат ['first':'hello', 'second':'world', 3:null]

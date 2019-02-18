@@ -20,11 +20,11 @@ interface Value{
     function equalLess(Environment $environment, Value $other): BooleanValue;
     function equalMore(Environment $environment, Value $other): BooleanValue;
 
-    function invert(): Value;
-    function not(): BooleanValue;
+    function invert(Environment $environment): Value;
+    function not(Environment $environment): BooleanValue;
 
-    function arrayGet(Environment $environment, string $key): Value;
-    function arraySet(Environment $environment, string $key, Value $value): Value;
+    function arrayGet(Environment $environment, Value $key): Value;
+    function arraySet(Environment $environment, Value $key, Value $value): Value;
 
     function invoke(Environment $environment, Value ...$values): Value;
 

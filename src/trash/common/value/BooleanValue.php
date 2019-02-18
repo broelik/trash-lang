@@ -67,12 +67,12 @@ class BooleanValue extends BaseValue{
         return $this->integerValue()->equalMore($environment, $other);
     }
 
-    function not(): BooleanValue{
+    function not(Environment $environment): BooleanValue{
         return $this->value ? self::FALSE() : self::TRUE();
     }
 
-    function invert(): Value{
-        return $this->not();
+    function invert(Environment $environment): Value{
+        return $this->not($environment);
     }
 
     function getName(): string{

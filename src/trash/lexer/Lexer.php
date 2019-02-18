@@ -46,7 +46,7 @@ class Lexer{
         ',' => TokenType::COMMA,
         '.' => TokenType::POINT,
         ':' => TokenType::COLON,
-        ';' => TokenType::SEMICOLON,
+        ';' => TokenType::OPERATOR_END,
 
         '..' => TokenType::UNDEFINED,
         '...' => TokenType::ELLIPSIS,
@@ -64,6 +64,8 @@ class Lexer{
 
         'return' => TokenType::RETURN,
         'print' => TokenType::PRINT,
+        'break' => TokenType::BREAK,
+        'continue' => TokenType::CONTINUE,
 
         'null' => TokenType::NULL,
         'true' => TokenType::TRUE,

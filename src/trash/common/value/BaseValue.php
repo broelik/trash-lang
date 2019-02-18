@@ -7,11 +7,11 @@ namespace trash\common\value;
 use trash\common\Environment;
 
 abstract class BaseValue implements Value{
-    function arrayGet(Environment $environment, string $key): Value{
+    function arrayGet(Environment $environment, Value $key): Value{
         throw new \RuntimeException("Unable to use {$this->getName()} as array");
     }
 
-    function arraySet(Environment $environment, string $key, Value $value): Value{
+    function arraySet(Environment $environment, Value $key, Value $value): Value{
         throw new \RuntimeException("Unable to use {$this->getName()} as array");
     }
 
@@ -44,7 +44,7 @@ abstract class BaseValue implements Value{
     }
 
     function notEqual(Environment $environment, Value $other): BooleanValue{
-        return $this->equal($environment, $other)->not();
+        return $this->equal($environment, $other)->not($environment);
     }
 
     function less(Environment $environment, Value $other): BooleanValue{
@@ -63,11 +63,11 @@ abstract class BaseValue implements Value{
         return $this->throwUnsupportedOperandException(__FUNCTION__, $other);
     }
 
-    function not(): BooleanValue{
-        return $this->booleanValue()->not();
+    function not(Environment $environment): BooleanValue{
+        return $this->booleanValue()->not($environment);
     }
 
-    function invert(): Value{
+    function invert(Environment $environment): Value{
         return $this->throwUnsupportedOperandException(__FUNCTION__);
     }
 
