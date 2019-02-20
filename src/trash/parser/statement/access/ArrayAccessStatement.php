@@ -31,12 +31,12 @@ class ArrayAccessStatement extends AssignStatement{
 
 
     public function assign(Environment $environment, Value $value, int $operator): Value{
-        $key = $this->eval($environment);
-        $newValue = $this->wrapValue($environment, $key, $value, $operator);
+        //$value = $this->eval($environment);
+        $newValue = $this->wrapValue($environment, $this->eval($environment), $value, $operator);
         if(!$newValue){
             throw new \RuntimeException("Unable assign to {$this->key}");
         }
-        return $this->target->eval($environment)->arraySet($environment, $key, $value);
+        return $this->target->eval($environment)->arraySet($environment, $this->key->eval($environment), $value);
     }
 
     public function eval(Environment $environment): Value{

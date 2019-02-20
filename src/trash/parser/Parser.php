@@ -27,6 +27,7 @@ use trash\parser\statement\block\ForStatement;
 use trash\parser\statement\block\FunctionDefStatement;
 use trash\parser\statement\block\IfStatement;
 use trash\parser\statement\block\RootBlockStatement;
+use trash\parser\statement\block\WhileStatement;
 use trash\parser\statement\single\BreakStatement;
 use trash\parser\statement\single\ContinueStatement;
 use trash\parser\statement\single\PrintStatement;
@@ -74,6 +75,9 @@ class Parser{
             if(!($block instanceof BlockStatement)){
                 $this->skipOperatorEnd();
             }
+        }
+        if(count($root->getStatements()) == 1){
+            return $root->getStatements()[0];
         }
 
         return $root;
@@ -226,8 +230,14 @@ class Parser{
                 $array = $this->expressionOrException();
                 $this->skipOrException(TokenType::CLOSE_RBRACE);
 
-                $for = new ForStatement($key, $value, $array);
-                return $this->collectBlock($for);
+                return $this->collectBlock(new ForStatement($key, $value, $array));
+            }
+            else if($this->skip(TokenType::WHILE)){
+                $this->skipOrException(TokenType::OPEN_RBRACE);
+                $expression = $this->expressionOrException();
+                $this->skipOrException(TokenType::CLOSE_RBRACE);
+
+                return $this->collectBlock(new WhileStatement($expression));
             }
         }
 
@@ -388,7 +398,7 @@ class Parser{
                     if(!$this->skip(TokenType::CLOSE_SBRACE)){
                         throw new ParserException("Brace not close");
                     }
-                    $result = new ArrayAccessStatement($result, $key);
+                    $result = new ArrayAccessStatement($key, $result);
                 }
                 // invoke
                 else if($this->skip(TokenType::OPEN_RBRACE)){
@@ -548,5 +558,14 @@ class Parser{
      */
     public static function ofInput($input): Parser{
         return new Parser(Lexer::ofInput($input)->lex());
+    }
+
+    /**
+     * @param $input
+     * @return Parser
+     * @throws LexerException
+     */
+    public static function ofString(string $input): Parser{
+        return new Parser((new Lexer($input))->lex());
     }
 }

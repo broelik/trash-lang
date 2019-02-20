@@ -50,28 +50,26 @@ class FunctionDefStatement extends BlockStatement{
     }
 
     public function eval(Environment $environment): Value{
-        $environment->setLocal($this->name, new FunctionValue(function(Environment $environment, Value ...$values){
-            $i = 0;
-            $env = new Environment($environment);
-            foreach($this->args as $name => $arg){
-                if(isset($values[$i])){
-                    $env->setLocal($name, $values[$i]);
-                }
-                else if($arg !== null){
-                    $env->setLocal($name, $arg->eval($environment));
-                }
-                else{
-                    throw new \RuntimeException("Missing {$name} argument for function {$this->name}");
-                }
-                $i++;
-            }
+        $function = new FunctionValue(function(Environment $environment, Value ...$values){
             try{
-                return parent::eval($env);
+                foreach($this->getStatements() as $statement){
+                    $statement->eval($environment);
+                }
+                return BaseValue::NULL();
             }
             catch(ReturnMessage $returnMessage){
-                return $returnMessage->getStatement()->eval($env);
+                return $returnMessage->getStatement()->eval($environment);
             }
-        }));
+        });
+        foreach($this->args as $name => $arg){
+            if($arg === null){
+                $function->putArgument($name, null);
+            }
+            else{
+                $function->putArgument($name, $arg->eval($environment));
+            }
+        }
+        $environment->setLocal($this->name, $function);
         return BaseValue::NULL();
     }
 }

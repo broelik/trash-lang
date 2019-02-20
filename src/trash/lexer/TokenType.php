@@ -64,8 +64,9 @@ class TokenType{
     const ELIF = 301;           // elif(condition){}
     const ELSE = 302;           // else{}
     const FOR = 303;            // for(a, b, ... : iterable){}
-    const WITH = 304;           // while(condition){}
-    const FUNCTION = 305;       // func(a, b=123, ...){}
+    const WHILE = 304;            // for(a, b, ... : iterable){}
+    const WITH = 305;           // while(condition){}
+    const FUNCTION = 306;       // func(a, b=123, ...){}
 
     // keywords
     const RETURN = 307;         // return expression

@@ -59,6 +59,7 @@ class Lexer{
         'elif' => TokenType::ELIF,
         'else' => TokenType::ELSE,
         'for' => TokenType::FOR,
+        'while' => TokenType::WHILE,
         'with' => TokenType::WITH,
         'func' => TokenType::FUNCTION,
 
@@ -99,6 +100,10 @@ class Lexer{
      * @var int
      */
     private $depth;
+    /**
+     * @var int
+     */
+    private $braceDepth;
 
     /**
      * @var array
@@ -199,6 +204,20 @@ class Lexer{
         $this->add(TokenType::OPERATOR_END);
 
         return $this->result;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDepth(): int{
+        return $this->depth;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBraceDepth(): int{
+        return $this->braceDepth;
     }
 
     /**
@@ -364,6 +383,10 @@ class Lexer{
     private function add(int $type, ?string $value = null): void{
         /** @var Token $last */
         $last = arr::last($this->result);
+        // for shell
+        if($type == TokenType::OPEN_BRACE || $type == TokenType::CLOSE_BRACE){
+            $this->braceDepth += $type == TokenType::OPEN_BRACE ? 1 : -1;
+        }
         if($last){
             // не позволяем добавить 2 OPERATOR_END подряд
             if($last->getType() == TokenType::OPERATOR_END && $type == TokenType::OPERATOR_END){
@@ -383,6 +406,7 @@ class Lexer{
         if(isset(self::$DEPTH_MAP[$type])){
             $this->depth += self::$DEPTH_MAP[$type];
         }
+
         // игнорируем OPERATOR_END, если значение глубины не равно 0
         if($type == TokenType::OPERATOR_END && $this->depth != 0){
             return;

@@ -1,15 +1,22 @@
 name = "blyat"
-func test(test="kek"){
+func test(test){
     func subFunction(){
         return test
     }
     if(test == "kek"){
         return subFunction()
     }
+    return test
 }
+print test(name)
 for(a : [1, 2, 3]){
     print a
     if(a == 2){
         break
     }
+}
+i = 0
+while(i < 10){
+    print i
+    i += 1
 }

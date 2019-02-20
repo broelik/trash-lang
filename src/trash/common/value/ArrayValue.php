@@ -37,7 +37,7 @@ class ArrayValue extends BaseValue{
     }
 
     function arrayGet(Environment $environment, Value $key): Value{
-        return $this->values[$this->toKey($key)];
+        return $this->values[$this->toKey($key)] ?? BaseValue::NULL();
     }
 
     function arraySet(Environment $environment, Value $key, Value $value): Value{
